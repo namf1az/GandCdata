@@ -35,6 +35,8 @@ run_analysis<-function(rootdir){
       v[2]<-as.character(a_l[as.numeric(j)])
       for(k in 1:length(m_and_s)){
         mmm<-mm[mm$s==i & mm$a==j,k]
+
+	# Calculate the mean for this feature related to the activity and subject stored in "j" and "i" respectively
         mmmm<-mean(as.numeric(mmm))
         v[2+k]<-as.character(mmmm)
       }
@@ -42,6 +44,8 @@ run_analysis<-function(rootdir){
       n<-n+1
     }
   }
+
+  # Store the new table in a matrix ("mtrx")
   v<-as.vector(l[[1]])
   mtrx<-matrix(data=v,ncol=length(v))
   for(i in 2:length(l)){
@@ -52,6 +56,8 @@ run_analysis<-function(rootdir){
   # Create final data frame and add descriptive column names
   df<-as.data.frame(mtrx)
   colnames(df)<-c("subject","activity",m_and_s)
+
+  # Write the table to the file "project.txt"
   write.table(df,file="project.txt",row.names=FALSE)
   options(op)
 }
